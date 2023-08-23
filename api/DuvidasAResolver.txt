@@ -12,3 +12,8 @@
 - Testar a alterar senha
 
     Como eu n arrumei ainda o token, não estou conseguindo testar essas rotinas.
+
+
+- Testar rotinas de publicações
+
+    Testar as rotinas criadas de publicação
