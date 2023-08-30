@@ -107,7 +107,7 @@ func AtualizarUsuario(w http.ResponseWriter, r *http.Request) {
 	parametros := mux.Vars(r)
 	usuarioID, erro := strconv.ParseUint(parametros["usuarioId"], 10, 64)
 	if erro != nil {
-		respostas.Erro(w, http.StatusInternalServerError, erro)
+		respostas.Erro(w, http.StatusBadRequest, erro)
 		return
 	}
 
@@ -124,7 +124,7 @@ func AtualizarUsuario(w http.ResponseWriter, r *http.Request) {
 
 	corpoRequisicao, erro := io.ReadAll(r.Body)
 	if erro != nil {
-		respostas.Erro(w, http.StatusInternalServerError, erro)
+		respostas.Erro(w, http.StatusUnprocessableEntity, erro)
 		return
 	}
 
@@ -162,7 +162,7 @@ func DeletarUsuario(w http.ResponseWriter, r *http.Request) {
 
 	usuarioID, erro := strconv.ParseUint(parametros["usuarioId"], 10, 64)
 	if erro != nil {
-		respostas.Erro(w, http.StatusInternalServerError, erro)
+		respostas.Erro(w, http.StatusBadRequest, erro)
 		return
 	}
 
@@ -328,7 +328,7 @@ func AtualizarSenha(w http.ResponseWriter, r *http.Request) {
 	parametros := mux.Vars(r)
 	usuarioID, erro := strconv.ParseUint(parametros["usuarioId"], 10, 64)
 	if erro != nil {
-		respostas.Erro(w, http.StatusInternalServerError, erro)
+		respostas.Erro(w, http.StatusBadRequest, erro)
 		return
 	}
 
@@ -360,7 +360,7 @@ func AtualizarSenha(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if erro = seguranca.VerificarSenha(senhaSalvaNoBanco, senha.Atual); erro != nil {
-		respostas.Erro(w, http.StatusUnauthorized, erro)
+		respostas.Erro(w, http.StatusUnauthorized, errors.New("A senha atual não condiz com a que está salva no banco"))
 		return
 	}
 

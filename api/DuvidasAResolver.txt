@@ -1,14 +1,3 @@
-- Conversão do token:
-
-    Verificar no fonte do token a conversão, visto quando fazemos uma requisição do tipo post ou put ele da um erro de token, curiosamente nas requisições GET 
-    não acontece o problema;
-
-- Verificar SQL da requisição "Seguindo"
-
-    Quando eu consulto o caminho "usuarios/id/seguindo" para verificar quais os usuários ele informa que a coluna do where não foi definida na tabela, mas eu consigo
-    rodar o comando normalmente no SQL. 
-
-
 - Testar a alterar senha
 
     Como eu n arrumei ainda o token, não estou conseguindo testar essas rotinas.

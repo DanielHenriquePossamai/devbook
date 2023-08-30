@@ -39,9 +39,7 @@ func (publicacao *Publicacao) Validar() error {
 	return nil
 }
 
-func (publicacao *Publicacao) formatar() error {
+func (publicacao *Publicacao) formatar() {
 	publicacao.Titulo = strings.TrimSpace(publicacao.Titulo)
 	publicacao.Conteudo = strings.TrimSpace(publicacao.Conteudo)
-
-	return nil
 }

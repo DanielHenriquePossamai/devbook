@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"strconv"
 	"strings"
 	"time"
 
@@ -47,15 +46,14 @@ func ExtrairUsuarioID(r *http.Request) (uint64, error) {
 		return 0, erro
 	}
 
-	fmt.Print("Até aqui tudo certo")
-
 	if permissoes, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		usuarioID, erro := strconv.ParseUint(fmt.Sprintf("%.of", permissoes["usuarioID"]), 10, 64)
-		if erro != nil {
-			return 0, erro
+		usuarioIDFloat64, ok := permissoes["usuarioId"].(float64)
+		if !ok {
+			return 0, errors.New("usuarioId não é um número válido")
 		}
 
-		return usuarioID, erro
+		usuarioID := uint64(usuarioIDFloat64)
+		return usuarioID, nil
 	}
 
 	return 0, errors.New("Token inválido!")
