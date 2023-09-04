@@ -111,7 +111,7 @@ func BuscarPublicacao(w http.ResponseWriter, r *http.Request) {
 }
 
 // AtualizaPublicacao atualiza a publicação
-func AtualizaPublicacao(w http.ResponseWriter, r *http.Request) {
+func AtualizarPublicacao(w http.ResponseWriter, r *http.Request) {
 	usuarioID, erro := autenticacao.ExtrairUsuarioID(r)
 	if erro != nil {
 		respostas.Erro(w, http.StatusUnauthorized, erro)

@@ -8,13 +8,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dgrijalva/jwt-go"
+	jwt "github.com/dgrijalva/jwt-go"
 )
 
 // CriarToken retorna um token assinado com as permissões do usuario
 func CriarToken(usuarioID uint64) (string, error) {
 	permissoes := jwt.MapClaims{}
-	permissoes["autorized"] = true
+	permissoes["authorized"] = true
 	permissoes["exp"] = time.Now().Add(time.Hour * 6).Unix()
 	permissoes["usuarioId"] = usuarioID
 

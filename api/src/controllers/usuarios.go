@@ -308,13 +308,13 @@ func BuscarSeguindo(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	repositorio := repositorios.NovoRepositorioDeUsuarios(db)
-	seguidores, erro := repositorio.BuscarSeguindo(usuarioID)
+	usuarios, erro := repositorio.BuscarSeguindo(usuarioID)
 	if erro != nil {
 		respostas.Erro(w, http.StatusInternalServerError, erro)
 		return
 	}
 
-	respostas.JSON(w, http.StatusOK, seguidores)
+	respostas.JSON(w, http.StatusOK, usuarios)
 }
 
 // AtualizarSenha atualiza a senha do usuário
@@ -332,8 +332,8 @@ func AtualizarSenha(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if usuarioID != usuarioIDNoToken {
-		respostas.Erro(w, http.StatusForbidden, errors.New("Não é possível atualizar dados de outro usuário!"))
+	if usuarioIDNoToken != usuarioID {
+		respostas.Erro(w, http.StatusForbidden, errors.New("Não é possível atualizar a senha de um usuário que não seja o seu"))
 		return
 	}
 
@@ -370,7 +370,7 @@ func AtualizarSenha(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if erro = repositorio.AtualizaSenha(usuarioID, string(senhaComHash)); erro != nil {
+	if erro = repositorio.AtualizarSenha(usuarioID, string(senhaComHash)); erro != nil {
 		respostas.Erro(w, http.StatusInternalServerError, erro)
 		return
 	}
